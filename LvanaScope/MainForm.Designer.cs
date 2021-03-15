@@ -28,19 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ConnectMenuToolStrip = new System.Windows.Forms.MenuStrip();
-            this.ComToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BaudRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SampleRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1KHz = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem10KHz = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem100KHz = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1MHz = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem10MHz = new System.Windows.Forms.ToolStripMenuItem();
-            this.PlayStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1Hz = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10Hz = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem100Hz = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.graphePanel1 = new LvanaScope.GraphePanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textSend = new System.Windows.Forms.TextBox();
             this.RdoSendModeHex = new System.Windows.Forms.RadioButton();
@@ -51,6 +44,22 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.RdoReceiveModeText = new System.Windows.Forms.RadioButton();
             this.RdoReceiveModeHex = new System.Windows.Forms.RadioButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.graphePanel1 = new LvanaScope.GraphePanel();
+            this.ComToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BaudRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SampleRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hzToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hzToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1KHz = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10KHz = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem100KHz = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1MHz = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10MHz = new System.Windows.Forms.ToolStripMenuItem();
+            this.PlayStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRFID = new System.Windows.Forms.ToolStripMenuItem();
             this.ConnectMenuToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -67,104 +76,34 @@
             this.BaudRateToolStripMenuItem,
             this.ConnectToolStripMenuItem,
             this.SampleRateToolStripMenuItem,
-            this.PlayStopToolStripMenuItem});
+            this.PlayStopToolStripMenuItem,
+            this.toolStripMenuItemRFID});
             this.ConnectMenuToolStrip.Location = new System.Drawing.Point(0, 0);
             this.ConnectMenuToolStrip.Name = "ConnectMenuToolStrip";
             this.ConnectMenuToolStrip.Size = new System.Drawing.Size(1102, 79);
             this.ConnectMenuToolStrip.TabIndex = 1;
             this.ConnectMenuToolStrip.Text = "menuStrip1";
             // 
-            // ComToolStripMenuItem
+            // toolStripMenuItem1Hz
             // 
-            this.ComToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.comport_48x48;
-            this.ComToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ComToolStripMenuItem.Name = "ComToolStripMenuItem";
-            this.ComToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
-            this.ComToolStripMenuItem.Size = new System.Drawing.Size(60, 75);
-            this.ComToolStripMenuItem.Text = "COM1";
-            this.ComToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.ComToolStripMenuItem.MouseEnter += new System.EventHandler(this.ComToolStripMenuItem_MouseEnter);
+            this.toolStripMenuItem1Hz.Name = "toolStripMenuItem1Hz";
+            this.toolStripMenuItem1Hz.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem1Hz.Text = "1Hz";
+            this.toolStripMenuItem1Hz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
             // 
-            // BaudRateToolStripMenuItem
+            // toolStripMenuItem10Hz
             // 
-            this.BaudRateToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.baud_48x48;
-            this.BaudRateToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.BaudRateToolStripMenuItem.Name = "BaudRateToolStripMenuItem";
-            this.BaudRateToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
-            this.BaudRateToolStripMenuItem.Size = new System.Drawing.Size(60, 75);
-            this.BaudRateToolStripMenuItem.Text = "9600";
-            this.BaudRateToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripMenuItem10Hz.Name = "toolStripMenuItem10Hz";
+            this.toolStripMenuItem10Hz.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem10Hz.Text = "10Hz";
+            this.toolStripMenuItem10Hz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
             // 
-            // ConnectToolStripMenuItem
+            // toolStripMenuItem100Hz
             // 
-            this.ConnectToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.connect_off_48x48;
-            this.ConnectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ConnectToolStripMenuItem.Name = "ConnectToolStripMenuItem";
-            this.ConnectToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
-            this.ConnectToolStripMenuItem.Size = new System.Drawing.Size(64, 75);
-            this.ConnectToolStripMenuItem.Text = "Connect";
-            this.ConnectToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.ConnectToolStripMenuItem.Click += new System.EventHandler(this.ConnectToolStripMenuItem_Click);
-            // 
-            // SampleRateToolStripMenuItem
-            // 
-            this.SampleRateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1KHz,
-            this.toolStripMenuItem10KHz,
-            this.toolStripMenuItem100KHz,
-            this.toolStripMenuItem1MHz,
-            this.toolStripMenuItem10MHz});
-            this.SampleRateToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.samplerate_48x48;
-            this.SampleRateToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.SampleRateToolStripMenuItem.Name = "SampleRateToolStripMenuItem";
-            this.SampleRateToolStripMenuItem.Size = new System.Drawing.Size(84, 75);
-            this.SampleRateToolStripMenuItem.Text = "Sample Rate";
-            this.SampleRateToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripMenuItem1KHz
-            // 
-            this.toolStripMenuItem1KHz.Name = "toolStripMenuItem1KHz";
-            this.toolStripMenuItem1KHz.Size = new System.Drawing.Size(113, 22);
-            this.toolStripMenuItem1KHz.Text = "1KHz";
-            this.toolStripMenuItem1KHz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
-            // 
-            // toolStripMenuItem10KHz
-            // 
-            this.toolStripMenuItem10KHz.Name = "toolStripMenuItem10KHz";
-            this.toolStripMenuItem10KHz.Size = new System.Drawing.Size(113, 22);
-            this.toolStripMenuItem10KHz.Text = "10KHz";
-            this.toolStripMenuItem10KHz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
-            // 
-            // toolStripMenuItem100KHz
-            // 
-            this.toolStripMenuItem100KHz.Name = "toolStripMenuItem100KHz";
-            this.toolStripMenuItem100KHz.Size = new System.Drawing.Size(113, 22);
-            this.toolStripMenuItem100KHz.Text = "100KHz";
-            this.toolStripMenuItem100KHz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
-            // 
-            // toolStripMenuItem1MHz
-            // 
-            this.toolStripMenuItem1MHz.Name = "toolStripMenuItem1MHz";
-            this.toolStripMenuItem1MHz.Size = new System.Drawing.Size(113, 22);
-            this.toolStripMenuItem1MHz.Text = "1MHz";
-            this.toolStripMenuItem1MHz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
-            // 
-            // toolStripMenuItem10MHz
-            // 
-            this.toolStripMenuItem10MHz.Name = "toolStripMenuItem10MHz";
-            this.toolStripMenuItem10MHz.Size = new System.Drawing.Size(113, 22);
-            this.toolStripMenuItem10MHz.Text = "10MHz";
-            this.toolStripMenuItem10MHz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
-            // 
-            // PlayStopToolStripMenuItem
-            // 
-            this.PlayStopToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.play_48x48;
-            this.PlayStopToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.PlayStopToolStripMenuItem.Name = "PlayStopToolStripMenuItem";
-            this.PlayStopToolStripMenuItem.Size = new System.Drawing.Size(60, 75);
-            this.PlayStopToolStripMenuItem.Text = "Play";
-            this.PlayStopToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.PlayStopToolStripMenuItem.Click += new System.EventHandler(this.PlayStopToolStripMenuItem_Click);
+            this.toolStripMenuItem100Hz.Name = "toolStripMenuItem100Hz";
+            this.toolStripMenuItem100Hz.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem100Hz.Text = "100Hz";
+            this.toolStripMenuItem100Hz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
             // 
             // splitContainer1
             // 
@@ -186,15 +125,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(1102, 596);
             this.splitContainer1.SplitterDistance = 752;
             this.splitContainer1.TabIndex = 2;
-            // 
-            // graphePanel1
-            // 
-            this.graphePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphePanel1.Location = new System.Drawing.Point(2, 2);
-            this.graphePanel1.Name = "graphePanel1";
-            this.graphePanel1.Padding = new System.Windows.Forms.Padding(2);
-            this.graphePanel1.Size = new System.Drawing.Size(748, 592);
-            this.graphePanel1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -320,6 +250,145 @@
             this.RdoReceiveModeHex.Text = "Hex";
             this.RdoReceiveModeHex.UseVisualStyleBackColor = true;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // graphePanel1
+            // 
+            this.graphePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphePanel1.Location = new System.Drawing.Point(2, 2);
+            this.graphePanel1.Name = "graphePanel1";
+            this.graphePanel1.Padding = new System.Windows.Forms.Padding(2);
+            this.graphePanel1.Size = new System.Drawing.Size(748, 592);
+            this.graphePanel1.TabIndex = 0;
+            // 
+            // ComToolStripMenuItem
+            // 
+            this.ComToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.comport_48x48;
+            this.ComToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ComToolStripMenuItem.Name = "ComToolStripMenuItem";
+            this.ComToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
+            this.ComToolStripMenuItem.Size = new System.Drawing.Size(60, 75);
+            this.ComToolStripMenuItem.Text = "COM1";
+            this.ComToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ComToolStripMenuItem.MouseEnter += new System.EventHandler(this.ComToolStripMenuItem_MouseEnter);
+            // 
+            // BaudRateToolStripMenuItem
+            // 
+            this.BaudRateToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.baud_48x48;
+            this.BaudRateToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.BaudRateToolStripMenuItem.Name = "BaudRateToolStripMenuItem";
+            this.BaudRateToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
+            this.BaudRateToolStripMenuItem.Size = new System.Drawing.Size(60, 75);
+            this.BaudRateToolStripMenuItem.Text = "9600";
+            this.BaudRateToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // ConnectToolStripMenuItem
+            // 
+            this.ConnectToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.connect_off_48x48;
+            this.ConnectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ConnectToolStripMenuItem.Name = "ConnectToolStripMenuItem";
+            this.ConnectToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
+            this.ConnectToolStripMenuItem.Size = new System.Drawing.Size(64, 75);
+            this.ConnectToolStripMenuItem.Text = "Connect";
+            this.ConnectToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ConnectToolStripMenuItem.Click += new System.EventHandler(this.ConnectToolStripMenuItem_Click);
+            // 
+            // SampleRateToolStripMenuItem
+            // 
+            this.SampleRateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hzToolStripMenuItem,
+            this.hzToolStripMenuItem1,
+            this.hzToolStripMenuItem2,
+            this.toolStripMenuItem1KHz,
+            this.toolStripMenuItem10KHz,
+            this.toolStripMenuItem100KHz,
+            this.toolStripMenuItem1MHz,
+            this.toolStripMenuItem10MHz});
+            this.SampleRateToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.samplerate_48x48;
+            this.SampleRateToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.SampleRateToolStripMenuItem.Name = "SampleRateToolStripMenuItem";
+            this.SampleRateToolStripMenuItem.Size = new System.Drawing.Size(84, 75);
+            this.SampleRateToolStripMenuItem.Text = "Sample Rate";
+            this.SampleRateToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // hzToolStripMenuItem
+            // 
+            this.hzToolStripMenuItem.Name = "hzToolStripMenuItem";
+            this.hzToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.hzToolStripMenuItem.Text = "1Hz";
+            this.hzToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
+            // 
+            // hzToolStripMenuItem1
+            // 
+            this.hzToolStripMenuItem1.Name = "hzToolStripMenuItem1";
+            this.hzToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
+            this.hzToolStripMenuItem1.Text = "10Hz";
+            this.hzToolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
+            // 
+            // hzToolStripMenuItem2
+            // 
+            this.hzToolStripMenuItem2.Name = "hzToolStripMenuItem2";
+            this.hzToolStripMenuItem2.Size = new System.Drawing.Size(113, 22);
+            this.hzToolStripMenuItem2.Text = "100Hz";
+            this.hzToolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
+            // 
+            // toolStripMenuItem1KHz
+            // 
+            this.toolStripMenuItem1KHz.Name = "toolStripMenuItem1KHz";
+            this.toolStripMenuItem1KHz.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem1KHz.Text = "1KHz";
+            this.toolStripMenuItem1KHz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
+            // 
+            // toolStripMenuItem10KHz
+            // 
+            this.toolStripMenuItem10KHz.Name = "toolStripMenuItem10KHz";
+            this.toolStripMenuItem10KHz.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem10KHz.Text = "10KHz";
+            this.toolStripMenuItem10KHz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
+            // 
+            // toolStripMenuItem100KHz
+            // 
+            this.toolStripMenuItem100KHz.Name = "toolStripMenuItem100KHz";
+            this.toolStripMenuItem100KHz.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem100KHz.Text = "100KHz";
+            this.toolStripMenuItem100KHz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
+            // 
+            // toolStripMenuItem1MHz
+            // 
+            this.toolStripMenuItem1MHz.Name = "toolStripMenuItem1MHz";
+            this.toolStripMenuItem1MHz.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem1MHz.Text = "1MHz";
+            this.toolStripMenuItem1MHz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
+            // 
+            // toolStripMenuItem10MHz
+            // 
+            this.toolStripMenuItem10MHz.Name = "toolStripMenuItem10MHz";
+            this.toolStripMenuItem10MHz.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem10MHz.Text = "10MHz";
+            this.toolStripMenuItem10MHz.Click += new System.EventHandler(this.toolStripMenuItemSampleRate_Click);
+            // 
+            // PlayStopToolStripMenuItem
+            // 
+            this.PlayStopToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.play_48x48;
+            this.PlayStopToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.PlayStopToolStripMenuItem.Name = "PlayStopToolStripMenuItem";
+            this.PlayStopToolStripMenuItem.Size = new System.Drawing.Size(60, 75);
+            this.PlayStopToolStripMenuItem.Text = "Play";
+            this.PlayStopToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.PlayStopToolStripMenuItem.Click += new System.EventHandler(this.PlayStopToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItemRFID
+            // 
+            this.toolStripMenuItemRFID.Image = global::LvanaScope.Properties.Resources.RFID_48x48;
+            this.toolStripMenuItemRFID.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItemRFID.Name = "toolStripMenuItemRFID";
+            this.toolStripMenuItemRFID.Size = new System.Drawing.Size(60, 75);
+            this.toolStripMenuItemRFID.Text = "RFID";
+            this.toolStripMenuItemRFID.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripMenuItemRFID.Click += new System.EventHandler(this.toolStripMenuItemRFID_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -363,12 +432,20 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox richTextReceive;
         private System.Windows.Forms.ToolStripMenuItem SampleRateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1Hz;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10Hz;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem100Hz;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1KHz;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10KHz;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem100KHz;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1MHz;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10MHz;
         private System.Windows.Forms.ToolStripMenuItem PlayStopToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hzToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hzToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem hzToolStripMenuItem2;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRFID;
     }
 }
 

@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using System.IO;
 using System.Threading;
+using Timer = System.Threading.Timer;
+using LvanaScope.Forms;
 
 namespace LvanaScope
 {
@@ -19,13 +21,21 @@ namespace LvanaScope
     {
         public int[] BaudRate = new int[] { 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
         private Color[] LogMsgTypeColor = { Color.Yellow, Color.Green, Color.White, Color.Orange, Color.Red };
+
+        public static MainForm main;
         private SerialPort serialPort = new SerialPort();
+
+        public RFID RfidMoudle = new RFID();
         private int AdcFrequence = 0;
         bool IsPlayStop = false;
+        bool IsConnected = false;        
         public MainForm()
         {
+            main = this;
             InitializeComponent();
             UpdateComToolMenu();
+            timer1.Enabled = true;
+            timer1.Start();
             int index = 0;
             foreach (var rate in BaudRate)
             {
@@ -36,6 +46,16 @@ namespace LvanaScope
                 BaudRateToolStripMenuItem.DropDownItems.Add(menu);
                 index++;
             }
+        }
+        
+        private void SerialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SerialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public void UpdateComToolMenu()
@@ -92,6 +112,7 @@ namespace LvanaScope
                     serialPort.StopBits = StopBits.One;
                     serialPort.Handshake = Handshake.None;
                     serialPort.Open();
+                    IsConnected = true;
                 }
                 catch (UnauthorizedAccessException) { error = true; }
                 catch (IOException) { error = true; }
@@ -155,8 +176,10 @@ namespace LvanaScope
                     {
                         changePlayStopStatus(true);
                     }
+                }else if(buffer[0] == 'R' && buffer[1] == 'F' && buffer[2] == 'I' && buffer[3] == 'D')
+                {
+                    RfidMoudle.ParsePacket(buffer);
                 }
-                
                 //Log(LogMsgType.Incoming, $"Received {bytes} Bytes\n");
             }
             else
@@ -186,7 +209,7 @@ namespace LvanaScope
             }
         }
 
-        private void Log(LogMsgType msgtype, string msg)
+        public void Log(LogMsgType msgtype, string msg)
         {
             richTextReceive.Invoke(new EventHandler(delegate
             {
@@ -288,6 +311,7 @@ namespace LvanaScope
                 try
                 {
                     serialPort.Close();
+                    IsConnected = false;
                 }
                 catch(Exception e)
                 {
@@ -300,6 +324,25 @@ namespace LvanaScope
             if (!serialPort.IsOpen) return;
             serialPort.Write(sz);
             Log(LogMsgType.Outgoing, sz);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if(!serialPort.IsOpen && IsConnected)
+            {
+                IsConnected = false;
+                serialPort.Close();
+                PlayStopToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.play_48x48;
+                PlayStopToolStripMenuItem.Text = "Play";
+                ConnectToolStripMenuItem.Image = global::LvanaScope.Properties.Resources.connect_off_48x48;
+                MessageBox.Show("Disconnected");                
+            }
+        }
+
+        private void toolStripMenuItemRFID_Click(object sender, EventArgs e)
+        {
+            FrmRFIDUtils dlg = new FrmRFIDUtils();
+            dlg.ShowDialog();
         }
     }
 }

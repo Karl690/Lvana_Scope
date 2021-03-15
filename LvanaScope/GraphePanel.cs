@@ -38,7 +38,7 @@ namespace LvanaScope
                             System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer,
                             true);
             InitializeComponent();
-            this.MouseWheel += GraphePanel_MouseWheel;
+            this.MouseWheel += GraphPanel_MouseWheel;
         }
 
 
@@ -95,12 +95,14 @@ namespace LvanaScope
 
             float xscale = wid / (float)ADC_BUFFER_SIZE;
             float yscale = high / (float)ADC_MAX_VALUE;
+
             for (int i = 0; i < ADC_BUFFER_SIZE; i ++)
             {
                 if (i >= SignalBuffer.Length) break;
-                pt.X = xscale * i * xAsixScale + GapX + xAxisPos;
                 
+                pt.X = xscale * i * xAsixScale + GapX + xAxisPos;                
                 pt.Y = high - SignalBuffer[i+3] * yscale + GapY;
+
                 if (i > 0 && pt.X >= GapX && pt.X <= GapX + GridWidth)
                 {
                     g.DrawLine(penGreen, ptPrev, pt);
@@ -139,12 +141,12 @@ namespace LvanaScope
             }
         }
 
-        private void GraphePanel_MouseUp(object sender, MouseEventArgs e)
+        private void GraphPanel_MouseUp(object sender, MouseEventArgs e)
         {
 
         }
 
-        private void GraphePanel_MouseWheel(object sender, MouseEventArgs e)
+        private void GraphPanel_MouseWheel(object sender, MouseEventArgs e)
         {
             float step = 0.02f;
             if(Control.ModifierKeys == Keys.Shift)

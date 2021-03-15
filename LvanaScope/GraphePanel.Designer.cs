@@ -39,7 +39,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GraphePanel_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GraphePanel_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GraphePanel_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GraphePanel_MouseUp);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GraphPanel_MouseUp);
             this.ResumeLayout(false);
 
         }
